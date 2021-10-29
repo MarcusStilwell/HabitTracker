@@ -10,8 +10,9 @@ import SwiftUI
 struct Activity: Identifiable, Codable {
     let actName: String
     var frequency: String
+    var description: String
     var id = UUID()
-    var completionCount = 0
+    var completionCount: Int = 0
 }
 
 class Habits: ObservableObject {
@@ -48,20 +49,22 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(habits.habitList) {habit in
-                    HStack{
-                        VStack{
-                            Text(habit.actName)
-                                .font(.headline)
+            List{
+                ForEach(habits.habitList) { habit in
+                    NavigationLink(destination: ActivityView(habits: habits, activityName: habit.actName)){
+                        HStack{
+                            VStack{
+                                Text(habit.actName)
+                                    .font(.headline)
+                                
+                                Text(habit.frequency)
+                            }
+                            Spacer()
                             
-                            Text(habit.frequency)
-                        }
-                        Spacer()
-                        
-                        VStack {
-                            Text("You have completed \(habit.actName)")
-                            Text("\(habit.completionCount) times")
+                            VStack {
+                                Text("You have completed \(habit.actName)")
+                                Text("\(habit.completionCount) times")
+                            }
                         }
                     }
                 }

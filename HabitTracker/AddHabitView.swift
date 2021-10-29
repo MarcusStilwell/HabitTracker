@@ -13,6 +13,7 @@ struct AddHabitView: View {
     @ObservedObject var habits: Habits
     @State private var actName: String = ""
     @State private var frequency: String = ""
+    @State private var description: String = ""
     
     static let frequencies = ["Daily", "Weekly", "Monthly"]
     
@@ -25,11 +26,12 @@ struct AddHabitView: View {
                         Text($0)
                     }
                 }
+                TextField("Description", text: $description)
             }
             
             .navigationBarTitle("Add new habit")
             .navigationBarItems(trailing: Button("Save") {
-                    let habit = Activity(actName: self.actName, frequency: self.frequency)
+                let habit = Activity(actName: self.actName, frequency: self.frequency, description: self.description)
                     self.habits.habitList.append(habit)
                     self.presentationMode.wrappedValue.dismiss()
             })
