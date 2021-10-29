@@ -41,7 +41,7 @@ struct ActivityView: View {
                     Spacer()
                     
                     }
-                .navigationBarTitle("Habit: \(self.actName)")
+                .navigationBarTitle("\(self.actName)")
                 .navigationBarTitleDisplayMode(.inline)
         }
         
