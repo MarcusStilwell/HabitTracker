@@ -9,52 +9,47 @@ import SwiftUI
 
 struct ActivityView: View {
     
-    @ObservedObject var habits = Habits()
-    @State private var actName: String = ""
-    @State private var frequency: String = ""
-    @State private var description: String = ""
-    @State private var completionCount: Int = 0
+    @ObservedObject var habits: Habits
+    @State var actName: String
+    @State private var frequency: String
+    @State private var description: String
     
-    init(habits: Habits, activityName: String) {
-        for activity in habits.habitList{
-            if activity.actName == activityName {
-                self.actName = activity.actName
-                self.frequency = activity.frequency
-                self.description = activity.description
-                break
-            }
-        }
+    init(habits: Habits, activityName: String, frequency: String, description: String) {
+        self.habits = habits
+        self.actName = activityName
+        self.frequency = frequency
+        self.description = description
     }
     
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack {
-                Text("\(description)")
-                
-                HStack{
-                    Text("Complete \(frequency) task")
-                    Button {
-                        for acts in habits.habitList{
-                            if acts.actName == self.actName{
-                                completionCount += 1
+        NavigationView{
+                VStack {
+                    
+                    Spacer()
+                    Text("\(description)")
+                    Spacer()
+
+                    Button(action: {
+                        if let activityIndex = habits.habitList.firstIndex(where: {$0.actName == self.actName}){
+                            habits.habitList[activityIndex].completionCount += 1
                             }
+                        }) {
+                            Text("Complete \(frequency) task")
                         }
-                    } label: {
-                        Image(systemName: "plus")
+                    
+                    Spacer()
+                    
                     }
-                }
-            }
+                .navigationBarTitle("Habit: \(self.actName)")
+                .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle("\(actName)")
-        
-        
         
     }
 }
 
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityView(habits: Habits(), activityName: "Hello")
+        ActivityView(habits: Habits(), activityName: "Hello", frequency: "Weekly", description: "My description")
     }
 }

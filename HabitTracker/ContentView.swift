@@ -51,7 +51,7 @@ struct ContentView: View {
         NavigationView {
             List{
                 ForEach(habits.habitList) { habit in
-                    NavigationLink(destination: ActivityView(habits: habits, activityName: habit.actName)){
+                    NavigationLink(destination: ActivityView(habits: habits, activityName: habit.actName, frequency: habit.frequency, description: habit.description)){
                         HStack{
                             VStack{
                                 Text(habit.actName)
