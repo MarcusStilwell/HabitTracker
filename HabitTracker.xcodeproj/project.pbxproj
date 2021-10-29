@@ -13,6 +13,7 @@
 		A5F9F693272B630C0073805B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5F9F692272B630C0073805B /* Assets.xcassets */; };
 		A5F9F696272B630C0073805B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5F9F695272B630C0073805B /* Preview Assets.xcassets */; };
 		A5F9F699272B630C0073805B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5F9F697272B630C0073805B /* LaunchScreen.storyboard */; };
+		A5F9F6A3272B6AE00073805B /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F9F6A2272B6AE00073805B /* AddHabitView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A5F9F695272B630C0073805B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A5F9F698272B630C0073805B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5F9F69A272B630C0073805B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5F9F6A2272B6AE00073805B /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				A5F9F68C272B63080073805B /* AppDelegate.swift */,
 				A5F9F68E272B63080073805B /* SceneDelegate.swift */,
 				A5F9F690272B63080073805B /* ContentView.swift */,
+				A5F9F6A2272B6AE00073805B /* AddHabitView.swift */,
 				A5F9F692272B630C0073805B /* Assets.xcassets */,
 				A5F9F697272B630C0073805B /* LaunchScreen.storyboard */,
 				A5F9F69A272B630C0073805B /* Info.plist */,
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5F9F68D272B63080073805B /* AppDelegate.swift in Sources */,
+				A5F9F6A3272B6AE00073805B /* AddHabitView.swift in Sources */,
 				A5F9F68F272B63080073805B /* SceneDelegate.swift in Sources */,
 				A5F9F691272B63080073805B /* ContentView.swift in Sources */,
 			);

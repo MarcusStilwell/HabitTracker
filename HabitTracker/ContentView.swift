@@ -7,10 +7,82 @@
 
 import SwiftUI
 
+struct Activity: Identifiable, Codable {
+    let actName: String
+    var frequency: String
+    var id = UUID()
+    var completionCount = 0
+}
+
+class Habits: ObservableObject {
+    @Published var habitList = [Activity]() {
+        didSet {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(habitList) {
+                UserDefaults.standard.set(encoded, forKey: "HabitList")
+            }
+        }
+    }
+    
+    init() {
+        if let habitList = UserDefaults.standard.data(forKey: "HabitList") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Activity].self, from: habitList) {
+                self.habitList = decoded
+                return
+            }
+        }
+
+        self.habitList = []
+    }
+}
+
 struct ContentView: View {
+    
+    @State private var showingAddHabits = false
+    @ObservedObject var habits = Habits()
+    
+    func removeHabit(at offsets: IndexSet) {
+        habits.habitList.remove(atOffsets: offsets)
+    }
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            List {
+                ForEach(habits.habitList) {habit in
+                    HStack{
+                        VStack{
+                            Text(habit.actName)
+                                .font(.headline)
+                            
+                            Text(habit.frequency)
+                        }
+                        Spacer()
+                        
+                        VStack {
+                            Text("You have completed \(habit.actName)")
+                            Text("\(habit.completionCount) times")
+                        }
+                    }
+                }
+                .onDelete(perform: removeHabit)
+            }
+            
+            
+            .navigationBarItems(trailing:
+                Button(action: {
+                    showingAddHabits.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+            )
+                .navigationBarTitle("Habit Tracker")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        .sheet(isPresented: $showingAddHabits){
+            AddHabitView(habits: self.habits)
+        }
+        
     }
 }
 
